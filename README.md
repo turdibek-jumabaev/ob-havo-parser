@@ -1,6 +1,12 @@
 # Ob-havo
 Ob-havo malumotlarini oson olish
 
+## O'rnatilishi kerak
+```
+requests==2.20.1
+beautifulsoup4==4.9.3
+```
+
 ## Foydalanish
 Yangi `test.py` nomli fayl yaratamiz.
 ```python
