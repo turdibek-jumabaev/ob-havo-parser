@@ -9,41 +9,34 @@ class Weather:
         self.t = requests.get(self.url)
         self.html_t = bs(self.t.content, 'html.parser')
 
-    def get_weather(self):
-        for el in self.html_t.select("#content"):
-            min = el.select(".temperature .min")[0].text
-            max = el.select(".temperature .max")[0].text
-            t_min = min[4:]
-            t_max = max[5:]
-            print(f'Температура в {self.city} от {t_min} до {t_max}')
-
     def today(self, day: bool = False, month: bool = False, min_temp: bool = False, max_temp: bool = False, date: bool = False):
+        result = dict()
         if max_temp:
             for el in self.html_t.select("#content"):
                 max = el.select(".temperature .max")[0].text
                 t_max = max[5:]
-                return t_max
+                result['max'] = t_max
 
         if min_temp:
             for el in self.html_t.select("#content"):
                 min = el.select(".temperature .min")[0].text
                 t_min = min[4:]
-                return t_min
+                result['min'] = t_min
 
         if month:
             for el in self.html_t.select("#content"):
                 month = el.select(".month")[0].text
-                return month
+                result['month'] = month
 
         if day:
             for el in self.html_t.select("#content"):
                 day = el.select(".day-link")[0].text
-                return day
+                result['day'] = day
 
         if date:
             for el in self.html_t.select("#content"):
                 date = el.select(".date")[0].text
-                return date
+                result['date'] = date
 
         else:
             for el in self.html_t.select("#content"):
